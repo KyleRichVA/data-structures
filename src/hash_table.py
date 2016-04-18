@@ -22,4 +22,9 @@ class Hash_Table(object):
 
         if self._table[indx] is None:
             self._table[indx] = []
+        for tup in self._table[indx]:
+            if tup[0] == key:
+                tup_ind = self._table[indx].index(tup)
+                self._table[indx][tup_ind] = (key, val)
+                return
         self._table[indx].append((key, val))
