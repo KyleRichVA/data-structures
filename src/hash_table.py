@@ -12,3 +12,14 @@ class Hash_Table(object):
         for char in key:
             indx += ord(char)
         return indx % len(self._table)
+
+    def set(self, key, val):
+        """Set the value to key in the table."""
+        try:
+            indx = self._hash(key)
+        except TypeError:
+            raise TypeError("Must Use Strings For Keys")
+
+        if self._table[indx] is None:
+            self._table[indx] = []
+        self._table[indx].append((key, val))
