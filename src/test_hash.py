@@ -43,3 +43,19 @@ def test_set_overwrite(test_hash):
     test_hash.set(KEY, 100)
     assert (KEY, 34) not in test_hash._table[test_hash._hash(KEY)]
     assert (KEY, 100) in test_hash._table[test_hash._hash(KEY)]
+
+
+def test_get_found(test_hash):
+    test_hash.set(KEY, 34)
+    assert test_hash.get(KEY) == 34
+
+
+def test_get_not_there(test_hash):
+    with pytest.raises(KeyError):
+        test_hash.get(KEY)
+
+
+@pytest.mark.parametrize("bads", BAD_ITEMS)
+def test_get_non_string(test_hash, bads):
+    with pytest.raises(TypeError):
+        test_hash.get(bads)
