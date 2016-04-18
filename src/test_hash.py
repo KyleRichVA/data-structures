@@ -1,13 +1,28 @@
 from hash_table import Hash_Table
 import pytest
+import io
 
 KEY = u'key'
 BAD_ITEMS = [1, True, {'Bad': 'Bad'}, ['bad', 13]]
+WORDS = []
+try:
+    wordfile = io.open('src/test_strs.txt', encoding='utf8')
+    WORDS = wordfile.readlines()
+except:
+    pass
 
 
 @pytest.fixture()
 def test_hash():
     return Hash_Table(10)
+
+
+@pytest.fixture()
+def big_hash():
+    big_hash = Hash_Table(250)
+    for word in WORDS:
+        big_hash.set(word, word)
+    return big_hash
 
 
 def test_hash_init(test_hash):
@@ -59,3 +74,8 @@ def test_get_not_there(test_hash):
 def test_get_non_string(test_hash, bads):
     with pytest.raises(TypeError):
         test_hash.get(bads)
+
+
+@pytest.mark.parametrize("word", WORDS)
+def test_hash_many_things(big_hash, word):
+    assert big_hash.get(word) == word
