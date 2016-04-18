@@ -4,7 +4,7 @@ class Hash_Table(object):
         """Initiation Method of Hash Table.
 
         Length of Table is Based on Passed Value num_buckets."""
-        self._table = [[]] * num_buckets
+        self._table = [None] * num_buckets
 
     def _hash(self, key):
         """Return the index of the table based off the hashed key."""
@@ -20,6 +20,8 @@ class Hash_Table(object):
         except TypeError:
             raise TypeError(u"Must Use Strings For Keys")
 
+        if self._table[indx] is None:
+            self._table[indx] = []
         for tup in self._table[indx]:
             if tup[0] == key:
                 tup_ind = self._table[indx].index(tup)
@@ -33,9 +35,9 @@ class Hash_Table(object):
             indx = self._hash(key)
         except TypeError:
             raise TypeError(u"Must Use Strings For Keys")
-
-        for tup in self._table[indx]:
-            if tup[0] == key:
-                return tup[1]
+        if self._table[indx]:
+            for tup in self._table[indx]:
+                if tup[0] == key:
+                    return tup[1]
         # Key wasn't found raise a key
         raise KeyError(u"Key Not Found in Hash Table")
