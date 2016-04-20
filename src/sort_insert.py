@@ -21,7 +21,7 @@ if __name__ == "__main__":
     print("Best case scenario (pre-sorted) [1, 2, 3, 4] the efficiency will be O(n)")
     print("Worst case scenario (reverse-sorted) [4, 3, 2, 1] the efficiency will be O(n^2)")
 
-    print("Best Case Test:  list over range of 1-100")
+    print("Best Case Test:  list over range of 1-1000")
     lst_best = list(range(1000))
     start_best = time.time()
     sort(lst_best)
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     diff_best = end_best - start_best
     print("Elapse time:  {} seconds".format(diff_best))
 
-    print("Average Case Test:  list over range of 1-100 with random order of values")
+    print("Average Case Test:  list over range of 1-1000 with random order of values")
     lst_ave = [randint(0, 1000) for i in range(1000)]
     start_ave = time.time()
     sort(lst_ave)
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     diff_ave = end_ave - start_ave
     print("Elapse time:  {} seconds".format(diff_ave))
 
-    print("Worst Case Test:  list over range of 1-100 in reverse order (100-1)")
+    print("Worst Case Test:  list over range of 1-1000 in reverse order (100-1)")
     lst_worst = list(range(1000))[::-1]
     start_worst = time.time()
     sort(lst_worst)
