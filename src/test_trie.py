@@ -1,9 +1,18 @@
 #  -*- coding: utf-8 -*-
 """Test file for trie."""
 import pytest
+import io
 
 
 TEST_DICT = {'t': {'e': {'s': {'t': {'$': {}, 'e': {'r': {'$': {}}}}}}}}
+
+
+try:
+    wordfile = io.open('src/test_strs.txt', encoding='utf8')
+    WORDS = wordfile.readlines()
+except:
+    WORDS = []
+
 
 
 @pytest.fixture()
@@ -17,6 +26,15 @@ def trie_stuff():
     from trie import Trie
     trie = Trie()
     trie._trie = TEST_DICT
+    return trie
+
+
+@pytest.fixture()
+def trie_ALL_THE_THINGS():
+    from trie import Trie
+    trie = Trie()
+    for word in WORDS:
+        trie.insert(word)
     return trie
 
 
@@ -59,3 +77,8 @@ def test_insert_tests(trie_stuff):
 def test_insert_bird(trie_stuff):
     trie_stuff.insert("bird")
     assert trie_stuff.contains("bird")
+
+
+@pytest.mark.parametrize("word", WORDS)
+def test_ALL_THE_THINGS(trie_ALL_THE_THINGS, word):
+    assert trie_ALL_THE_THINGS.contains(word)
