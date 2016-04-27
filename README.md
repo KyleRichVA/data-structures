@@ -36,3 +36,6 @@ Continuation of the Graph data structure. We added weighted edges to our Graph d
 
 ## bst.py
 The Binary Search Tree. Currently can append nodes and traverse the tree through a variaty of ways. The tree is a combination of many nodes each with a left and right property. Adding to the node is dependent of the values of the node and which is greater than the other. Traversal is done through recursive generators mostly except for breadth first which uses a generator with a deque counter keeping track of the proper order to return node values.
+
+## trie.py
+A Trie data structure built in Python. Is represented through a nested dictonary structure where each letter of the word is represented as a key and a 'end of word' represented as a '$' key. At this time would be able to take any kind of string or iter in so probably best to setup some form of cleanup before inserting values into the dictonary. 
