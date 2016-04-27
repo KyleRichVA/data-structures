@@ -79,6 +79,19 @@ def test_insert_bird(trie_stuff):
     assert trie_stuff.contains("bird")
 
 
-@pytest.mark.parametrize("word", WORDS)
-def test_ALL_THE_THINGS(trie_ALL_THE_THINGS, word):
-    assert trie_ALL_THE_THINGS.contains(word)
+def test_traversal_empty(trie_empty):
+    trav = trie_empty.traversal()
+    lst = [word for word in trav]
+    assert lst == []
+
+
+def test_traversal_basic(trie_stuff):
+    trav = trie_stuff.traversal()
+    #import pdb; pdb.set_trace()
+    lst = [word for word in trav]
+    assert 'test' in lst and 'tester' in lst
+
+
+# @pytest.mark.parametrize("word", WORDS)
+# def test_ALL_THE_THINGS(trie_ALL_THE_THINGS, word):
+#     assert trie_ALL_THE_THINGS.contains(word)
