@@ -79,6 +79,21 @@ def test_insert_bird(trie_stuff):
     assert trie_stuff.contains("bird")
 
 
+def test_insert_non_string(trie_stuff):
+    with pytest.raises(ValueError):
+        trie_stuff.insert(42)
+
+
+def test_insert_space_string(trie_empty):
+    with pytest.raises(ValueError):
+        trie_empty.insert('Hello Word')
+
+
+def test_insert_cleans_string(trie_empty):
+    trie_empty.insert('Hello$')
+    assert trie_empty.contains('hello')
+
+
 def test_traversal_empty(trie_empty):
     trav = trie_empty.traversal()
     lst = [word for word in trav]
@@ -87,9 +102,15 @@ def test_traversal_empty(trie_empty):
 
 def test_traversal_basic(trie_stuff):
     trav = trie_stuff.traversal()
-    #import pdb; pdb.set_trace()
     lst = [word for word in trav]
     assert 'test' in lst and 'tester' in lst
+
+
+def test_traversal_after_insert(trie_stuff):
+    trie_stuff.insert('bird')
+    trav = trie_stuff.traversal()
+    lst = [word for word in trav]
+    assert 'test' in lst and 'tester' in lst and 'bird' in lst
 
 
 # @pytest.mark.parametrize("word", WORDS)
