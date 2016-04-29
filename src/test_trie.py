@@ -34,7 +34,7 @@ def trie_ALL_THE_THINGS():
     from trie import Trie
     trie = Trie()
     for word in WORDS:
-        trie.insert(word)
+        trie.insert(word.strip('\n'))
     return trie
 
 
@@ -113,6 +113,13 @@ def test_traversal_after_insert(trie_stuff):
     assert 'test' in lst and 'tester' in lst and 'bird' in lst
 
 
-# @pytest.mark.parametrize("word", WORDS)
-# def test_ALL_THE_THINGS(trie_ALL_THE_THINGS, word):
-#     assert trie_ALL_THE_THINGS.contains(word)
+@pytest.mark.parametrize("word", WORDS)
+def test_ALL_THE_THINGS_CONTAINS(trie_ALL_THE_THINGS, word):
+    assert trie_ALL_THE_THINGS.contains(word.strip('\n').lower())
+
+
+def test_ALL_THE_THINGS_TRAVERSAL(trie_ALL_THE_THINGS):
+    trav = trie_ALL_THE_THINGS.traversal()
+    lst = [word for word in trav]
+    for word in WORDS:
+        assert word.strip('\n').lower() in lst

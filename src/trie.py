@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Trie data structure."""
 import re
+from past.builtins import basestring
 
 
 class Trie(object):
@@ -20,7 +21,7 @@ class Trie(object):
 
     def insert(self, token):
         """Insert the token into the Trie."""
-        if not isinstance(token, str) or ' ' in token:
+        if not isinstance(token, basestring) or ' ' in token:
             raise ValueError('Token must be a one word string')
         token = re.sub(r'\W', '', token.lower())
         cursor = self._trie
