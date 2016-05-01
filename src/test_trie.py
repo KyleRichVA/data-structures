@@ -133,9 +133,9 @@ def test_autocomplete_longer_doesnt_show_shorter(trie_stuff):
     assert 'test' not in trie_stuff.autocomplete('teste')
 
 
-# @pytest.mark.parametrize("word", WORDS)
-# def test_ALL_THE_THINGS_CONTAINS(trie_ALL_THE_THINGS, word):
-#     assert trie_ALL_THE_THINGS.contains(word.strip('\n').lower())
+@pytest.mark.parametrize("word", WORDS)
+def test_ALL_THE_THINGS_CONTAINS(trie_ALL_THE_THINGS, word):
+    assert trie_ALL_THE_THINGS.contains(word.strip('\n').lower())
 
 
 def test_ALL_THE_THINGS_TRAVERSAL(trie_ALL_THE_THINGS):
@@ -143,3 +143,8 @@ def test_ALL_THE_THINGS_TRAVERSAL(trie_ALL_THE_THINGS):
     lst = [word for word in trav]
     for word in WORDS:
         assert word.strip('\n').lower() in lst
+
+
+def test_ALL_THE_THINGS_AUTOCOMPLETE(trie_ALL_THE_THINGS):
+    auto = trie_ALL_THE_THINGS.autocomplete('a')
+    assert len(auto) == 4
