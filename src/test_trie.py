@@ -112,9 +112,18 @@ def test_traversal_after_insert(trie_stuff):
     assert 'test' in lst and 'tester' in lst and 'bird' in lst
 
 
-@pytest.mark.parametrize("word", WORDS)
-def test_ALL_THE_THINGS_CONTAINS(trie_ALL_THE_THINGS, word):
-    assert trie_ALL_THE_THINGS.contains(word.strip('\n').lower())
+def test_autocomplete_empty(trie_empty):
+    assert trie_empty.autocomplete('test') == []
+
+
+def test_autocomplete_basic(trie_stuff):
+    result = trie_stuff.autocomplete('test')
+    assert 'test' in result and 'tester' in result
+
+
+# @pytest.mark.parametrize("word", WORDS)
+# def test_ALL_THE_THINGS_CONTAINS(trie_ALL_THE_THINGS, word):
+#     assert trie_ALL_THE_THINGS.contains(word.strip('\n').lower())
 
 
 def test_ALL_THE_THINGS_TRAVERSAL(trie_ALL_THE_THINGS):

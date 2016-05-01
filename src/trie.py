@@ -43,3 +43,12 @@ class Trie(object):
                     continue
                 path.append(cursor[char_key])
                 words.append(cur_word+char_key)
+
+    def autocomplete(self, token):
+        """Returns a list of up to 4 possible words in the trie based off the token."""
+        possibles = []
+        traversal = self.traversal()
+        for word in traversal:
+            if token in word and len(possibles) < 4:
+                possibles.append(word)
+        return possibles
