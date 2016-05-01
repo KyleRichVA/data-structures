@@ -14,7 +14,6 @@ except:
     WORDS = []
 
 
-
 @pytest.fixture()
 def trie_empty():
     from trie import Trie
