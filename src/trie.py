@@ -46,9 +46,6 @@ class Trie(object):
 
     def autocomplete(self, token):
         """Returns a list of up to 4 possible words in the trie based off the token."""
-        possibles = []
         traversal = self.traversal()
-        for word in traversal:
-            if token in word and len(possibles) < 4:
-                possibles.append(word)
-        return possibles
+        possibles = [word for word in traversal if token in word[:len(token)]]
+        return possibles[:4]

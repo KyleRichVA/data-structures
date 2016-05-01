@@ -121,6 +121,18 @@ def test_autocomplete_basic(trie_stuff):
     assert 'test' in result and 'tester' in result
 
 
+def test_autocomplete_not_there(trie_stuff):
+    assert 'test' not in trie_stuff.autocomplete('bi')
+
+
+def test_autocomplete_end_of_word(trie_stuff):
+    assert 'test' not in trie_stuff.autocomplete('st')
+
+
+def test_autocomplete_longer_doesnt_show_shorter(trie_stuff):
+    assert 'test' not in trie_stuff.autocomplete('teste')
+
+
 # @pytest.mark.parametrize("word", WORDS)
 # def test_ALL_THE_THINGS_CONTAINS(trie_ALL_THE_THINGS, word):
 #     assert trie_ALL_THE_THINGS.contains(word.strip('\n').lower())
